@@ -24,7 +24,7 @@ jobs:
 
       - shell: bash
         run: |
-          zip bskyweb.zip bskyweb
+          zip -r bskyweb.zip bskyweb
 
       - name: Upload output
         uses: actions/upload-artifact@v4
