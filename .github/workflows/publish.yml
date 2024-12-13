@@ -26,8 +26,11 @@ jobs:
         run: |
           zip -r bskyweb.zip bskyweb
 
-      - name: Upload output
-        uses: actions/upload-artifact@v4
+      - name: Release zip
+        uses: softprops/action-gh-release@v1
         with:
-          name: bskyweb.zip
-          path: bskyweb.zip
+          prerelease: true
+          name: build
+          tag_name: build
+          files: bskyweb.zip
+          fail_on_unmatched_files: true
