@@ -171,6 +171,10 @@ export function PostThread({uri}: {uri: string | undefined}) {
     () => new Set<string>(),
   )
 
+  const [collapsedUris, setCollapsedUris] = React.useState(
+    () => new Set<string>(),
+  )
+
   const [fetchedAtCache] = React.useState(() => new Map<string, number>())
   const [randomCache] = React.useState(() => new Map<string, number>())
   const skeleton = React.useMemo(() => {
@@ -436,6 +440,27 @@ export function PostThread({uri}: {uri: string | undefined}) {
       if (!treeView && prev && item.ctx.hasMoreSelfThread) {
         return <PostThreadLoadMore post={prev.post} />
       }
+      if (item.ctx.depth > 1) {
+        let targetDepth = item.ctx.depth - 1
+        let collapsedChild = false
+        while (targetDepth > 0) {
+          for (let i = index; i >= 0; i--) {
+            const iter = isThreadPost(posts[i])
+              ? (posts[i] as ThreadPost)
+              : undefined
+            if (!iter) continue
+            if (iter.ctx.depth === targetDepth) {
+              if (collapsedUris.has(iter.post.uri)) {
+                collapsedChild = true
+              }
+              break
+            }
+          }
+          if (collapsedChild) break
+          else targetDepth -= 1
+        }
+        if (collapsedChild) return <></>
+      }
 
       return (
         <View
@@ -462,6 +487,22 @@ export function PostThread({uri}: {uri: string | undefined}) {
             }
             onPostReply={onPostReply}
             hideTopBorder={index === 0 && !item.ctx.isParentLoading}
+            isCollapsed={collapsedUris.has(item.post.uri)}
+            setIsCollapsed={() => {
+              if (collapsedUris.has(item.post.uri)) {
+                setCollapsedUris(set => {
+                  const nextSet = new Set(set)
+                  nextSet.delete(item.post.uri)
+                  return nextSet
+                })
+              } else {
+                setCollapsedUris(set => {
+                  const nextSet = new Set(set)
+                  nextSet.add(item.post.uri)
+                  return nextSet
+                })
+              }
+            }}
           />
         </View>
       )

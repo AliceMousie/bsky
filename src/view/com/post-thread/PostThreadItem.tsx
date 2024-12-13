@@ -76,6 +76,8 @@ export function PostThreadItem({
   onPostReply,
   hideTopBorder,
   threadgateRecord,
+  isCollapsed,
+  setIsCollapsed,
 }: {
   post: AppBskyFeedDefs.PostView
   record: AppBskyFeedPost.Record
@@ -93,6 +95,8 @@ export function PostThreadItem({
   onPostReply: (postUri: string | undefined) => void
   hideTopBorder?: boolean
   threadgateRecord?: AppBskyFeedThreadgate.Record
+  isCollapsed?: boolean
+  setIsCollapsed?: Function
 }) {
   const postShadowed = usePostShadow(post)
   const richText = useMemo(
@@ -128,6 +132,8 @@ export function PostThreadItem({
         onPostReply={onPostReply}
         hideTopBorder={hideTopBorder}
         threadgateRecord={threadgateRecord}
+        isCollapsed={isCollapsed}
+        setIsCollapsed={setIsCollapsed}
       />
     )
   }
@@ -173,6 +179,8 @@ let PostThreadItemLoaded = ({
   onPostReply,
   hideTopBorder,
   threadgateRecord,
+  isCollapsed,
+  setIsCollapsed,
 }: {
   post: Shadow<AppBskyFeedDefs.PostView>
   record: AppBskyFeedPost.Record
@@ -191,6 +199,8 @@ let PostThreadItemLoaded = ({
   onPostReply: (postUri: string | undefined) => void
   hideTopBorder?: boolean
   threadgateRecord?: AppBskyFeedThreadgate.Record
+  isCollapsed?: boolean
+  setIsCollapsed?: Function
 }): React.ReactNode => {
   const t = useTheme()
   const pal = usePalette('default')
@@ -560,6 +570,22 @@ let PostThreadItemLoaded = ({
               </View>
             )}
 
+            <button
+              onClick={e => {
+                e.preventDefault()
+                setIsCollapsed && setIsCollapsed()
+              }}
+              style={{
+                width: '24px',
+                height: '24px',
+                border: '2px solid rgb(37, 51, 66)',
+                backgroundColor: 'transparent',
+                borderRadius: '6px',
+                zIndex: 100,
+              }}>
+              {isCollapsed ? '+' : '-'}
+            </button>
+
             <View style={[a.flex_1]}>
               <PostMeta
                 author={post.author}
@@ -577,42 +603,46 @@ let PostThreadItemLoaded = ({
                 style={[a.pb_2xs]}
                 additionalCauses={additionalPostAlerts}
               />
-              {richText?.text ? (
-                <View style={[a.pb_2xs, a.pr_sm]}>
-                  <RichText
-                    enableTags
-                    value={richText}
-                    style={[a.flex_1, a.text_md]}
-                    numberOfLines={limitLines ? MAX_POST_LINES : undefined}
-                    authorHandle={post.author.handle}
+              {!isCollapsed && (
+                <>
+                  {richText?.text ? (
+                    <View style={[a.pb_2xs, a.pr_sm]}>
+                      <RichText
+                        enableTags
+                        value={richText}
+                        style={[a.flex_1, a.text_md]}
+                        numberOfLines={limitLines ? MAX_POST_LINES : undefined}
+                        authorHandle={post.author.handle}
+                      />
+                    </View>
+                  ) : undefined}
+                  {limitLines ? (
+                    <TextLink
+                      text={_(msg`Show More`)}
+                      style={pal.link}
+                      onPress={onPressShowMore}
+                      href="#"
+                    />
+                  ) : undefined}
+                  {post.embed && (
+                    <View style={[a.pb_xs]}>
+                      <PostEmbeds
+                        embed={post.embed}
+                        moderation={moderation}
+                        viewContext={PostEmbedViewContext.Feed}
+                      />
+                    </View>
+                  )}
+                  <PostCtrls
+                    post={post}
+                    record={record}
+                    richText={richText}
+                    onPressReply={onPressReply}
+                    logContext="PostThreadItem"
+                    threadgateRecord={threadgateRecord}
                   />
-                </View>
-              ) : undefined}
-              {limitLines ? (
-                <TextLink
-                  text={_(msg`Show More`)}
-                  style={pal.link}
-                  onPress={onPressShowMore}
-                  href="#"
-                />
-              ) : undefined}
-              {post.embed && (
-                <View style={[a.pb_xs]}>
-                  <PostEmbeds
-                    embed={post.embed}
-                    moderation={moderation}
-                    viewContext={PostEmbedViewContext.Feed}
-                  />
-                </View>
+                </>
               )}
-              <PostCtrls
-                post={post}
-                record={record}
-                richText={richText}
-                onPressReply={onPressReply}
-                logContext="PostThreadItem"
-                threadgateRecord={threadgateRecord}
-              />
             </View>
           </View>
           {hasMore ? (
