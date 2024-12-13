@@ -141,9 +141,7 @@ export function AppearanceSettingsScreen({}: Props) {
               contentContainerStyle={[a.gap_sm]}
               iconInset={false}>
               <SettingsList.ItemIcon icon={Pal} />
-              <SettingsList.ItemText>
-                Custom Colors! (Refresh page to apply)
-              </SettingsList.ItemText>
+              <SettingsList.ItemText>Custom Colors!</SettingsList.ItemText>
               <Text style={[a.leading_snug]}>Primary Color</Text>
               <input
                 type="color"
