@@ -167,7 +167,7 @@ export const defaults: Schema = {
   pdsAddressHistory: [],
   disableHaptics: false,
   disableAutoplay: PlatformInfo.getIsReducedMotionEnabled(),
-  kawaii: false,
+  kawaii: true,
   hasCheckedForStarterPack: false,
   subtitlesEnabled: true,
 }
