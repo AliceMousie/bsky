@@ -22,11 +22,12 @@ jobs:
       - name: Build
         run: yarn build-web
 
-      - name: Push
-        uses: s0/git-publish-subdir-action@develop
-        env:
-          REPO: self
-          BRANCH: dist
-          FOLDER: bskyweb
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MESSAGE: "Build: ({sha}) {msg}"
+      - shell: bash
+        run: |
+          zip bskyweb.zip bskyweb
+
+      - name: Upload output
+        uses: actions/upload-artifact@v4
+        with:
+          name: bskyweb.zip
+          path: bskyweb.zip
