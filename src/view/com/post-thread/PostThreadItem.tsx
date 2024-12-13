@@ -570,21 +570,23 @@ let PostThreadItemLoaded = ({
               </View>
             )}
 
-            <button
-              onClick={e => {
-                e.preventDefault()
-                setIsCollapsed && setIsCollapsed()
-              }}
-              style={{
-                width: '24px',
-                height: '24px',
-                border: '2px solid rgb(37, 51, 66)',
-                backgroundColor: 'transparent',
-                borderRadius: '6px',
-                zIndex: 100,
-              }}>
-              {isCollapsed ? '+' : '-'}
-            </button>
+            {treeView && (
+              <button
+                onClick={e => {
+                  e.preventDefault()
+                  setIsCollapsed && setIsCollapsed()
+                }}
+                style={{
+                  width: '24px',
+                  height: '24px',
+                  border: '2px solid rgb(37, 51, 66)',
+                  backgroundColor: 'transparent',
+                  borderRadius: '6px',
+                  zIndex: 100,
+                }}>
+                {isCollapsed ? '+' : '-'}
+              </button>
+            )}
 
             <View style={[a.flex_1]}>
               <PostMeta
