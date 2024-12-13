@@ -50,7 +50,7 @@ func run(args []string) {
 					Name:     "http-address",
 					Usage:    "Specify the local IP/port to bind to",
 					Required: false,
-					Value:    ":8100",
+					Value:    ":443",
 					EnvVars:  []string{"HTTP_ADDRESS"},
 				},
 				&cli.StringFlag{
