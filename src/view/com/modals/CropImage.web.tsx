@@ -10,8 +10,9 @@ import ReactCrop, {PercentCrop} from 'react-image-crop'
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
 import {getDataUriSize} from '#/lib/media/util'
-import {gradients, s} from '#/lib/styles'
+import {getStyledGradient, s} from '#/lib/styles'
 import {useModalControls} from '#/state/modals'
+import {useThemePrefs} from '#/state/shell'
 import {Text} from '#/view/com/util/text/Text'
 
 export const snapPoints = ['0%']
@@ -35,6 +36,8 @@ export function Component({
 
   const imageRef = React.useRef<HTMLImageElement>(null)
   const [crop, setCrop] = React.useState<PercentCrop>()
+  const {primaryColorHue} = useThemePrefs()
+  const gradients = getStyledGradient(primaryColorHue)
 
   const isEmpty = !crop || (crop.width || crop.height) === 0
 

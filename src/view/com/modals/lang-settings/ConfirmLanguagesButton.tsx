@@ -5,7 +5,8 @@ import {useLingui} from '@lingui/react'
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
-import {colors, gradients, s} from '#/lib/styles'
+import {colors, getStyledGradient, s} from '#/lib/styles'
+import {useThemePrefs} from '#/state/shell'
 
 export const ConfirmLanguagesButton = ({
   onPress,
@@ -17,6 +18,8 @@ export const ConfirmLanguagesButton = ({
   const pal = usePalette('default')
   const {_} = useLingui()
   const {isMobile} = useWebMediaQueries()
+  const {primaryColorHue} = useThemePrefs()
+  const gradients = getStyledGradient(primaryColorHue)
   return (
     <View
       style={[

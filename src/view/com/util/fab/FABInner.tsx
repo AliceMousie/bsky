@@ -9,8 +9,9 @@ import {useHaptics} from '#/lib/haptics'
 import {useMinimalShellFabTransform} from '#/lib/hooks/useMinimalShellTransform'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
 import {clamp} from '#/lib/numbers'
-import {gradients} from '#/lib/styles'
+import {getStyledGradient} from '#/lib/styles'
 import {isWeb} from '#/platform/detection'
+import {useThemePrefs} from '#/state/shell'
 import {ios} from '#/alf'
 
 export interface FABProps
@@ -24,6 +25,8 @@ export function FABInner({testID, icon, onPress, ...props}: FABProps) {
   const {isMobile, isTablet} = useWebMediaQueries()
   const playHaptic = useHaptics()
   const fabMinimalShellTransform = useMinimalShellFabTransform()
+  const {primaryColorHue} = useThemePrefs()
+  const gradients = getStyledGradient(primaryColorHue)
 
   const size = isTablet ? styles.sizeLarge : styles.sizeRegular
 
@@ -53,7 +56,7 @@ export function FABInner({testID, icon, onPress, ...props}: FABProps) {
         targetScale={0.9}
         {...props}>
         <LinearGradient
-          colors={[gradients.blueLight.start, gradients.blueLight.end]}
+          colors={['hsl(120, 94%, 67%)', gradients.blueLight.end]}
           start={{x: 0, y: 0}}
           end={{x: 1, y: 1}}
           style={[styles.inner, size]}>

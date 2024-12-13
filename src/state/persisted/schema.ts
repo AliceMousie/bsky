@@ -49,6 +49,8 @@ export type PersistedCurrentAccount = z.infer<typeof currentAccountSchema>
 const schema = z.object({
   colorMode: z.enum(['system', 'light', 'dark']),
   darkTheme: z.enum(['dim', 'dark']).optional(),
+  primaryColorHue: z.string(),
+  contrastColorHue: z.string(),
   session: z.object({
     accounts: z.array(accountSchema),
     currentAccount: currentAccountSchema.optional(),
@@ -131,6 +133,8 @@ export type Schema = z.infer<typeof schema>
 export const defaults: Schema = {
   colorMode: 'system',
   darkTheme: 'dim',
+  primaryColorHue: '211',
+  contrastColorHue: '211',
   session: {
     accounts: [],
     currentAccount: undefined,

@@ -20,12 +20,13 @@ import {usePalette} from '#/lib/hooks/usePalette'
 import {compressIfNeeded} from '#/lib/media/manip'
 import {cleanError} from '#/lib/strings/errors'
 import {enforceLen} from '#/lib/strings/helpers'
-import {colors, gradients, s} from '#/lib/styles'
+import {colors, getStyledGradient, s} from '#/lib/styles'
 import {useTheme} from '#/lib/ThemeContext'
 import {logger} from '#/logger'
 import {isWeb} from '#/platform/detection'
 import {useModalControls} from '#/state/modals'
 import {useProfileUpdateMutation} from '#/state/queries/profile'
+import {useThemePrefs} from '#/state/shell'
 import {Text} from '#/view/com/util/text/Text'
 import * as Toast from '#/view/com/util/Toast'
 import {EditableUserAvatar} from '#/view/com/util/UserAvatar'
@@ -68,6 +69,8 @@ export function Component({
   const [newUserAvatar, setNewUserAvatar] = useState<
     RNImage | undefined | null
   >()
+  const {primaryColorHue} = useThemePrefs()
+  const gradients = getStyledGradient(primaryColorHue)
   const onPressCancel = () => {
     closeModal()
   }

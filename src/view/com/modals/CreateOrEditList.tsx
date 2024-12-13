@@ -21,7 +21,7 @@ import {cleanError, isNetworkError} from '#/lib/strings/errors'
 import {enforceLen} from '#/lib/strings/helpers'
 import {richTextToString} from '#/lib/strings/rich-text-helpers'
 import {shortenLinks, stripInvalidMentions} from '#/lib/strings/rich-text-manip'
-import {colors, gradients, s} from '#/lib/styles'
+import {colors, getStyledGradient, s} from '#/lib/styles'
 import {useTheme} from '#/lib/ThemeContext'
 import {useModalControls} from '#/state/modals'
 import {
@@ -29,6 +29,7 @@ import {
   useListMetadataMutation,
 } from '#/state/queries/list'
 import {useAgent} from '#/state/session'
+import {useThemePrefs} from '#/state/shell'
 import {ErrorMessage} from '../util/error/ErrorMessage'
 import {Text} from '../util/text/Text'
 import * as Toast from '../util/Toast'
@@ -57,6 +58,8 @@ export function Component({
   const listCreateMutation = useListCreateMutation()
   const listMetadataMutation = useListMetadataMutation()
   const agent = useAgent()
+  const {primaryColorHue} = useThemePrefs()
+  const gradients = getStyledGradient(primaryColorHue)
 
   const activePurpose = useMemo(() => {
     if (list?.purpose) {

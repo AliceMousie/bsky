@@ -13,6 +13,7 @@ const themes = createThemes({
     primary: BLUE_HUE,
     negative: RED_HUE,
     positive: GREEN_HUE,
+    contrast: BLUE_HUE,
   },
 })
 
@@ -50,6 +51,7 @@ export function createThemes({
     primary: number
     negative: number
     positive: number
+    contrast: number
   }
 }): {
   lightPalette: Palette
@@ -63,21 +65,21 @@ export function createThemes({
     like: '#ec4899',
     trueBlack: '#000000',
 
-    gray_0: `hsl(${hues.primary}, 20%, ${defaultScale[14]}%)`,
-    gray_25: `hsl(${hues.primary}, 20%, ${defaultScale[13]}%)`,
-    gray_50: `hsl(${hues.primary}, 20%, ${defaultScale[12]}%)`,
-    gray_100: `hsl(${hues.primary}, 20%, ${defaultScale[11]}%)`,
-    gray_200: `hsl(${hues.primary}, 20%, ${defaultScale[10]}%)`,
-    gray_300: `hsl(${hues.primary}, 20%, ${defaultScale[9]}%)`,
-    gray_400: `hsl(${hues.primary}, 20%, ${defaultScale[8]}%)`,
-    gray_500: `hsl(${hues.primary}, 20%, ${defaultScale[7]}%)`,
-    gray_600: `hsl(${hues.primary}, 24%, ${defaultScale[6]}%)`,
-    gray_700: `hsl(${hues.primary}, 24%, ${defaultScale[5]}%)`,
-    gray_800: `hsl(${hues.primary}, 28%, ${defaultScale[4]}%)`,
-    gray_900: `hsl(${hues.primary}, 28%, ${defaultScale[3]}%)`,
-    gray_950: `hsl(${hues.primary}, 28%, ${defaultScale[2]}%)`,
-    gray_975: `hsl(${hues.primary}, 28%, ${defaultScale[1]}%)`,
-    gray_1000: `hsl(${hues.primary}, 28%, ${defaultScale[0]}%)`,
+    gray_0: `hsl(${hues.contrast}, 20%, ${defaultScale[14]}%)`,
+    gray_25: `hsl(${hues.contrast}, 20%, ${defaultScale[13]}%)`,
+    gray_50: `hsl(${hues.contrast}, 20%, ${defaultScale[12]}%)`,
+    gray_100: `hsl(${hues.contrast}, 20%, ${defaultScale[11]}%)`,
+    gray_200: `hsl(${hues.contrast}, 20%, ${defaultScale[10]}%)`,
+    gray_300: `hsl(${hues.contrast}, 20%, ${defaultScale[9]}%)`,
+    gray_400: `hsl(${hues.contrast}, 20%, ${defaultScale[8]}%)`,
+    gray_500: `hsl(${hues.contrast}, 20%, ${defaultScale[7]}%)`,
+    gray_600: `hsl(${hues.contrast}, 24%, ${defaultScale[6]}%)`,
+    gray_700: `hsl(${hues.contrast}, 24%, ${defaultScale[5]}%)`,
+    gray_800: `hsl(${hues.contrast}, 28%, ${defaultScale[4]}%)`,
+    gray_900: `hsl(${hues.contrast}, 28%, ${defaultScale[3]}%)`,
+    gray_950: `hsl(${hues.contrast}, 28%, ${defaultScale[2]}%)`,
+    gray_975: `hsl(${hues.contrast}, 28%, ${defaultScale[1]}%)`,
+    gray_1000: `hsl(${hues.contrast}, 28%, ${defaultScale[0]}%)`,
 
     primary_25: `hsl(${hues.primary}, 99%, 97%)`,
     primary_50: `hsl(${hues.primary}, 99%, 95%)`,

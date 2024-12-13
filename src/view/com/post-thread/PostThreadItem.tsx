@@ -545,17 +545,33 @@ let PostThreadItemLoaded = ({
                     : 8,
               },
             ]}>
-            {/* If we are in threaded mode, the avatar is rendered in PostMeta */}
-            {!isThreadedChild && (
+            <div style={{display: 'flex', flexDirection: 'row'}}>
+              {treeView && (
+                <button
+                  onClick={e => {
+                    e.preventDefault()
+                    setIsCollapsed && setIsCollapsed()
+                  }}
+                  style={{
+                    width: '16px',
+                    height: '16px',
+                    border: 'none',
+                    backgroundColor: 'transparent',
+                    marginLeft: '-8px',
+                    marginRight: '10px',
+                  }}>
+                  {isCollapsed ? '[+]' : '[-]'}
+                </button>
+              )}
               <View>
                 <PreviewableUserAvatar
-                  size={42}
+                  size={isThreadedChild ? 36 : 42}
                   profile={post.author}
                   moderation={moderation.ui('avatar')}
                   type={post.author.associated?.labeler ? 'labeler' : 'user'}
                 />
 
-                {showChildReplyLine && (
+                {showChildReplyLine && !isThreadedChild && (
                   <View
                     style={[
                       styles.replyLine,
@@ -568,25 +584,7 @@ let PostThreadItemLoaded = ({
                   />
                 )}
               </View>
-            )}
-
-            {treeView && (
-              <button
-                onClick={e => {
-                  e.preventDefault()
-                  setIsCollapsed && setIsCollapsed()
-                }}
-                style={{
-                  width: '24px',
-                  height: '24px',
-                  border: '2px solid rgb(37, 51, 66)',
-                  backgroundColor: 'transparent',
-                  borderRadius: '6px',
-                  zIndex: 100,
-                }}>
-                {isCollapsed ? '+' : '-'}
-              </button>
-            )}
+            </div>
 
             <View style={[a.flex_1]}>
               <PostMeta
@@ -594,7 +592,7 @@ let PostThreadItemLoaded = ({
                 moderation={moderation}
                 timestamp={post.indexedAt}
                 postHref={postHref}
-                showAvatar={isThreadedChild}
+                showAvatar={false}
                 avatarModeration={moderation.ui('avatar')}
                 avatarSize={24}
                 style={[a.pb_xs]}

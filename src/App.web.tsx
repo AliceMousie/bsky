@@ -38,7 +38,7 @@ import {
   useSessionApi,
 } from '#/state/session'
 import {readLastActiveAccount} from '#/state/session/util'
-import {Provider as ShellStateProvider} from '#/state/shell'
+import {Provider as ShellStateProvider, useThemePrefs} from '#/state/shell'
 import {Provider as ComposerProvider} from '#/state/shell/composer'
 import {Provider as LightStatusBarProvider} from '#/state/shell/light-status-bar'
 import {Provider as LoggedOutViewProvider} from '#/state/shell/logged-out'
@@ -68,6 +68,7 @@ function InnerApp() {
   const [isReady, setIsReady] = React.useState(false)
   const {currentAccount} = useSession()
   const {resumeSession} = useSessionApi()
+  const {primaryColorHue, contrastColorHue} = useThemePrefs()
   const theme = useColorModeTheme()
   const {_} = useLingui()
   const hasCheckedReferrer = useStarterPackEntry()
@@ -102,7 +103,10 @@ function InnerApp() {
   if (!isReady || !hasCheckedReferrer) return null
 
   return (
-    <Alf theme={theme}>
+    <Alf
+      theme={theme}
+      primaryColorHue={primaryColorHue}
+      contrastColorHue={contrastColorHue}>
       <ThemeProvider theme={theme}>
         <RootSiblingParent>
           <VideoVolumeProvider>

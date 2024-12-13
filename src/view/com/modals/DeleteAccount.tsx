@@ -13,12 +13,13 @@ import {useLingui} from '@lingui/react'
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
 import {cleanError} from '#/lib/strings/errors'
-import {colors, gradients, s} from '#/lib/styles'
+import {colors, getStyledGradient, s} from '#/lib/styles'
 import {useTheme} from '#/lib/ThemeContext'
 import {isAndroid, isWeb} from '#/platform/detection'
 import {useModalControls} from '#/state/modals'
 import {DM_SERVICE_HEADERS} from '#/state/queries/messages/const'
 import {useAgent, useSession, useSessionApi} from '#/state/session'
+import {useThemePrefs} from '#/state/shell'
 import {DeactivateAccountDialog} from '#/screens/Settings/components/DeactivateAccountDialog'
 import {atoms as a, useTheme as useNewTheme} from '#/alf'
 import {useDialogControl} from '#/components/Dialog'
@@ -49,6 +50,8 @@ export function Component({}: {}) {
   const [isProcessing, setIsProcessing] = React.useState<boolean>(false)
   const [error, setError] = React.useState<string>('')
   const deactivateAccountControl = useDialogControl()
+  const {primaryColorHue} = useThemePrefs()
+  const gradients = getStyledGradient(primaryColorHue)
   const onPressSendEmail = async () => {
     setError('')
     setIsProcessing(true)

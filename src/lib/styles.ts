@@ -63,6 +63,14 @@ export const gradients = {
   blueDark: {start: '#5F45E0', end: colors.blue3}, // avis, banner
 }
 
+export const getStyledGradient = (hue: string) => {
+  return {
+    blueLight: {start: `hsl(${hue}, 94%, 57%)`, end: `hsl(${hue}, 100%, 50%)`}, // buttons
+    blue: {start: `hsl(${hue}, 94%, 57%)`, end: `hsl(${hue}, 100%, 50%)`}, // fab
+    blueDark: {start: `hsl(${hue}, 70%, 55%)`, end: `hsl(${hue}, 100%, 50%)`}, // avis, banner
+  }
+}
+
 export const s = StyleSheet.create({
   // helpers
   footerSpacer: {height: 100},

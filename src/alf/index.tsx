@@ -1,3 +1,4 @@
+/* eslint-disable bsky-internal/avoid-unwrapped-text */
 import React from 'react'
 
 import {
@@ -50,6 +51,7 @@ export const Context = React.createContext<Alf>({
       primary: BLUE_HUE,
       negative: RED_HUE,
       positive: GREEN_HUE,
+      contrast: BLUE_HUE,
     },
   }),
   fonts: {
@@ -65,7 +67,13 @@ export const Context = React.createContext<Alf>({
 export function ThemeProvider({
   children,
   theme: themeName,
-}: React.PropsWithChildren<{theme: ThemeName}>) {
+  primaryColorHue,
+  contrastColorHue,
+}: React.PropsWithChildren<{
+  theme: ThemeName
+  primaryColorHue: string
+  contrastColorHue: string
+}>) {
   const [fontScale, setFontScale] = React.useState<Alf['fonts']['scale']>(() =>
     getFontScale(),
   )
@@ -97,12 +105,13 @@ export function ThemeProvider({
   const themes = React.useMemo(() => {
     return createThemes({
       hues: {
-        primary: BLUE_HUE,
+        primary: parseInt(primaryColorHue),
         negative: RED_HUE,
         positive: GREEN_HUE,
+        contrast: parseInt(contrastColorHue),
       },
     })
-  }, [])
+  }, [primaryColorHue, contrastColorHue])
 
   const value = React.useMemo<Alf>(
     () => ({
@@ -129,7 +138,33 @@ export function ThemeProvider({
     ],
   )
 
-  return <Context.Provider value={value}>{children}</Context.Provider>
+  return (
+    <Context.Provider value={value}>
+      <style>
+        {`html.theme--light {
+  --text: black;
+  --background: white;
+  --backgroundLight: hsl(${primaryColorHue}, 20%, 95%);
+  background-color: white;
+}
+html.theme--dark {
+  color-scheme: dark;
+  background-color: black;
+  --text: white;
+  --background: black;
+  --backgroundLight: hsl(${primaryColorHue}, 20%, 20%);
+}
+html.theme--dim {
+  color-scheme: dark;
+  background-color: hsl(${primaryColorHue}, 28%, 12%);
+  --text: white;
+  --background: hsl(211, 20%, 4%);
+  --backgroundLight: hsl(${primaryColorHue}, 20%, 10%);
+	}`}
+      </style>
+      {children}
+    </Context.Provider>
+  )
 }
 
 export function useAlf() {

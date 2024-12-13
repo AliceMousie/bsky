@@ -52,7 +52,7 @@ import {
   useSessionApi,
 } from '#/state/session'
 import {readLastActiveAccount} from '#/state/session/util'
-import {Provider as ShellStateProvider} from '#/state/shell'
+import {Provider as ShellStateProvider, useThemePrefs} from '#/state/shell'
 import {Provider as ComposerProvider} from '#/state/shell/composer'
 import {Provider as LightStatusBarProvider} from '#/state/shell/light-status-bar'
 import {Provider as LoggedOutViewProvider} from '#/state/shell/logged-out'
@@ -90,6 +90,7 @@ function InnerApp() {
   const {currentAccount} = useSession()
   const {resumeSession} = useSessionApi()
   const theme = useColorModeTheme()
+  const {primaryColorHue, contrastColorHue} = useThemePrefs()
   const {_} = useLingui()
 
   const hasCheckedReferrer = useStarterPackEntry()
@@ -124,7 +125,10 @@ function InnerApp() {
   }, [_])
 
   return (
-    <Alf theme={theme}>
+    <Alf
+      theme={theme}
+      primaryColorHue={primaryColorHue}
+      contrastColorHue={contrastColorHue}>
       <ThemeProvider theme={theme}>
         <Splash isReady={isReady && hasCheckedReferrer}>
           <RootSiblingParent>
