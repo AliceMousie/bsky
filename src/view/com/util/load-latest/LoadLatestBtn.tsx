@@ -9,9 +9,9 @@ import {useMinimalShellFabTransform} from '#/lib/hooks/useMinimalShellTransform'
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
 import {clamp} from '#/lib/numbers'
-import {colors} from '#/lib/styles'
 import {isWeb} from '#/platform/detection'
 import {useSession} from '#/state/session'
+import {useTheme} from '#/alf'
 
 const AnimatedTouchableOpacity =
   Animated.createAnimatedComponent(TouchableOpacity)
@@ -26,6 +26,7 @@ export function LoadLatestBtn({
   showIndicator: boolean
 }) {
   const pal = usePalette('default')
+  const t = useTheme()
   const {hasSession} = useSession()
   const {isDesktop, isTablet, isMobile, isTabletOrMobile} = useWebMediaQueries()
   const fabMinimalShellTransform = useMinimalShellFabTransform()
@@ -62,7 +63,15 @@ export function LoadLatestBtn({
       accessibilityLabel={label}
       accessibilityHint="">
       <FontAwesomeIcon icon="angle-up" color={pal.colors.text} size={19} />
-      {showIndicator && <View style={[styles.indicator, pal.borderDark]} />}
+      {showIndicator && (
+        <View
+          style={[
+            styles.indicator,
+            pal.borderDark,
+            {backgroundColor: t.palette.primary_400},
+          ]}
+        />
+      )}
     </AnimatedTouchableOpacity>
   )
 }
@@ -92,7 +101,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 3,
     right: 3,
-    backgroundColor: colors.blue3,
     width: 12,
     height: 12,
     borderRadius: 6,

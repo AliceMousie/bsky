@@ -23,10 +23,12 @@ import {
   DropdownItemButton,
 } from '#/view/com/util/forms/DropdownButton'
 import {Text} from '#/view/com/util/text/Text'
+import {useTheme} from '#/alf'
 import {codeToLanguageName} from '../../../../locale/helpers'
 
 export function SelectLangBtn() {
   const pal = usePalette('default')
+  const t = useTheme()
   const {_} = useLingui()
   const {openModal} = useModalControls()
   const langPrefs = useLanguagePrefs()
@@ -107,7 +109,10 @@ export function SelectLangBtn() {
       accessibilityLabel={_(msg`Language selection`)}
       accessibilityHint="">
       {postLanguagesPref.length > 0 ? (
-        <Text type="lg-bold" style={[pal.link, styles.label]} numberOfLines={1}>
+        <Text
+          type="lg-bold"
+          style={[pal.link, styles.label, {color: t.palette.primary_500}]}
+          numberOfLines={1}>
           {postLanguagesPref.map(lang => codeToLanguageName(lang)).join(', ')}
         </Text>
       ) : (

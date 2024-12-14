@@ -6,7 +6,7 @@ import ProgressPie from 'react-native-progress/Pie'
 
 import {MAX_GRAPHEME_LENGTH} from '#/lib/constants'
 import {usePalette} from '#/lib/hooks/usePalette'
-import {atoms as a} from '#/alf'
+import {atoms as a, useTheme} from '#/alf'
 import {Text} from '../../util/text/Text'
 
 export function CharProgress({
@@ -24,8 +24,9 @@ export function CharProgress({
 }) {
   const maxLength = max || MAX_GRAPHEME_LENGTH
   const pal = usePalette('default')
-  const textColor = count > maxLength ? '#e60000' : pal.colors.text
-  const circleColor = count > maxLength ? '#e60000' : pal.colors.link
+  const t = useTheme()
+  const textColor = count > maxLength ? '#e60000' : t.palette.primary_500
+  const circleColor = count > maxLength ? '#e60000' : t.palette.primary_500
   return (
     <View
       style={[a.flex_row, a.align_center, a.justify_between, a.gap_sm, style]}>

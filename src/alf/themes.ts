@@ -61,6 +61,10 @@ export function createThemes({
   dark: Theme
   dim: Theme
 } {
+  const offsetLuma = (hue: number, luma: number) => {
+    if (hue < 40 || hue > 200) return luma
+    return luma * 0.7
+  }
   const color = {
     like: '#ec4899',
     trueBlack: '#000000',
@@ -81,19 +85,19 @@ export function createThemes({
     gray_975: `hsl(${hues.contrast}, 28%, ${defaultScale[1]}%)`,
     gray_1000: `hsl(${hues.contrast}, 28%, ${defaultScale[0]}%)`,
 
-    primary_25: `hsl(${hues.primary}, 99%, 97%)`,
-    primary_50: `hsl(${hues.primary}, 99%, 95%)`,
-    primary_100: `hsl(${hues.primary}, 99%, 90%)`,
-    primary_200: `hsl(${hues.primary}, 99%, 80%)`,
-    primary_300: `hsl(${hues.primary}, 99%, 70%)`,
-    primary_400: `hsl(${hues.primary}, 99%, 60%)`,
-    primary_500: `hsl(${hues.primary}, 99%, 53%)`,
-    primary_600: `hsl(${hues.primary}, 99%, 42%)`,
-    primary_700: `hsl(${hues.primary}, 99%, 34%)`,
-    primary_800: `hsl(${hues.primary}, 99%, 26%)`,
-    primary_900: `hsl(${hues.primary}, 99%, 18%)`,
-    primary_950: `hsl(${hues.primary}, 99%, 10%)`,
-    primary_975: `hsl(${hues.primary}, 99%, 7%)`,
+    primary_25: `hsl(${hues.primary}, 99%, ${offsetLuma(hues.primary, 97)}%)`,
+    primary_50: `hsl(${hues.primary}, 99%, ${offsetLuma(hues.primary, 95)}%)`,
+    primary_100: `hsl(${hues.primary}, 99%, ${offsetLuma(hues.primary, 90)}%)`,
+    primary_200: `hsl(${hues.primary}, 99%, ${offsetLuma(hues.primary, 80)}%)`,
+    primary_300: `hsl(${hues.primary}, 99%, ${offsetLuma(hues.primary, 70)}%)`,
+    primary_400: `hsl(${hues.primary}, 99%, ${offsetLuma(hues.primary, 60)}%)`,
+    primary_500: `hsl(${hues.primary}, 99%, ${offsetLuma(hues.primary, 53)}%)`,
+    primary_600: `hsl(${hues.primary}, 99%, ${offsetLuma(hues.primary, 42)}%)`,
+    primary_700: `hsl(${hues.primary}, 99%, ${offsetLuma(hues.primary, 34)}%)`,
+    primary_800: `hsl(${hues.primary}, 99%, ${offsetLuma(hues.primary, 26)}%)`,
+    primary_900: `hsl(${hues.primary}, 99%, ${offsetLuma(hues.primary, 18)}%)`,
+    primary_950: `hsl(${hues.primary}, 99%, ${offsetLuma(hues.primary, 10)}%)`,
+    primary_975: `hsl(${hues.primary}, 99%, ${offsetLuma(hues.primary, 7)}%)`,
 
     green_25: `hsl(${hues.positive}, 82%, 97%)`,
     green_50: `hsl(${hues.positive}, 82%, 95%)`,
@@ -253,19 +257,19 @@ export function createThemes({
     black: `hsl(${hues.primary}, 28%, ${dimScale[0]}%)`,
     like: color.like,
 
-    contrast_25: `hsl(${hues.primary}, 28%, ${dimScale[1]}%)`,
-    contrast_50: `hsl(${hues.primary}, 28%, ${dimScale[2]}%)`,
-    contrast_100: `hsl(${hues.primary}, 28%, ${dimScale[3]}%)`,
-    contrast_200: `hsl(${hues.primary}, 28%, ${dimScale[4]}%)`,
-    contrast_300: `hsl(${hues.primary}, 24%, ${dimScale[5]}%)`,
-    contrast_400: `hsl(${hues.primary}, 24%, ${dimScale[6]}%)`,
-    contrast_500: `hsl(${hues.primary}, 20%, ${dimScale[7]}%)`,
-    contrast_600: `hsl(${hues.primary}, 20%, ${dimScale[8]}%)`,
-    contrast_700: `hsl(${hues.primary}, 20%, ${dimScale[9]}%)`,
-    contrast_800: `hsl(${hues.primary}, 20%, ${dimScale[10]}%)`,
-    contrast_900: `hsl(${hues.primary}, 20%, ${dimScale[11]}%)`,
-    contrast_950: `hsl(${hues.primary}, 20%, ${dimScale[12]}%)`,
-    contrast_975: `hsl(${hues.primary}, 20%, ${dimScale[13]}%)`,
+    contrast_25: `hsl(${hues.contrast}, 28%, ${dimScale[1]}%)`,
+    contrast_50: `hsl(${hues.contrast}, 28%, ${dimScale[2]}%)`,
+    contrast_100: `hsl(${hues.contrast}, 28%, ${dimScale[3]}%)`,
+    contrast_200: `hsl(${hues.contrast}, 28%, ${dimScale[4]}%)`,
+    contrast_300: `hsl(${hues.contrast}, 24%, ${dimScale[5]}%)`,
+    contrast_400: `hsl(${hues.contrast}, 24%, ${dimScale[6]}%)`,
+    contrast_500: `hsl(${hues.contrast}, 20%, ${dimScale[7]}%)`,
+    contrast_600: `hsl(${hues.contrast}, 20%, ${dimScale[8]}%)`,
+    contrast_700: `hsl(${hues.contrast}, 20%, ${dimScale[9]}%)`,
+    contrast_800: `hsl(${hues.contrast}, 20%, ${dimScale[10]}%)`,
+    contrast_900: `hsl(${hues.contrast}, 20%, ${dimScale[11]}%)`,
+    contrast_950: `hsl(${hues.contrast}, 20%, ${dimScale[12]}%)`,
+    contrast_975: `hsl(${hues.contrast}, 20%, ${dimScale[13]}%)`,
 
     primary_25: `hsl(${hues.primary}, 50%, ${dimScale[1]}%)`,
     primary_50: `hsl(${hues.primary}, 60%, ${dimScale[2]}%)`,

@@ -6,6 +6,7 @@ import {Trans} from '@lingui/macro'
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {makeProfileLink} from '#/lib/routes/links'
+import {useTheme} from '#/alf'
 import {useInteractionState} from '#/components/hooks/useInteractionState'
 import {SubtleWebHover} from '#/components/SubtleWebHover'
 import {Link} from '../util/Link'
@@ -18,6 +19,7 @@ export function ViewFullThread({uri}: {uri: string}) {
     onOut: onHoverOut,
   } = useInteractionState()
   const pal = usePalette('default')
+  const t = useTheme()
   const itemHref = React.useMemo(() => {
     const urip = new AtUri(uri)
     return makeProfileLink({did: urip.hostname, handle: ''}, 'post', urip.rkey)
@@ -52,7 +54,13 @@ export function ViewFullThread({uri}: {uri: string}) {
         </Svg>
       </View>
 
-      <Text type="md" style={[pal.link, {paddingTop: 18, paddingBottom: 4}]}>
+      <Text
+        type="md"
+        style={[
+          pal.link,
+          {color: t.palette.primary_500},
+          {paddingTop: 18, paddingBottom: 4},
+        ]}>
         <Trans>View full thread</Trans>
       </Text>
     </Link>

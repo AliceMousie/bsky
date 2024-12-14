@@ -799,7 +799,7 @@ function ExpandedPostDetails({
             <InlineLinkText
               to={translatorUrl}
               label={_(msg`Translate`)}
-              style={[a.text_sm, pal.link]}
+              style={[a.text_sm, pal.link, {color: t.palette.primary_500}]}
               onPress={onTranslatePress}>
               <Trans>Translate</Trans>
             </InlineLinkText>
