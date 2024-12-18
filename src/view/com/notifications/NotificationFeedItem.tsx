@@ -164,8 +164,8 @@ let NotificationFeedItem = ({
           post={item.subject}
           style={
             isHighlighted && {
-              backgroundColor: pal.colors.unreadNotifBg,
-              borderColor: pal.colors.unreadNotifBorder,
+              backgroundColor: t.palette.primary_25,
+              borderColor: t.palette.primary_100,
             }
           }
           hideTopBorder={hideTopBorder}
@@ -381,8 +381,8 @@ let NotificationFeedItem = ({
         item.notification.isRead
           ? undefined
           : {
-              backgroundColor: pal.colors.unreadNotifBg,
-              borderColor: pal.colors.unreadNotifBorder,
+              backgroundColor: t.palette.primary_25,
+              borderColor: t.palette.primary_100,
             },
         {borderTopWidth: hideTopBorder ? 0 : StyleSheet.hairlineWidth},
         a.overflow_hidden,
