@@ -24,6 +24,7 @@ import {TextSize_Stroke2_Corner0_Rounded as TextSize} from '#/components/icons/T
 import {TitleCase_Stroke2_Corner0_Rounded as Aa} from '#/components/icons/TitleCase'
 import * as Layout from '#/components/Layout'
 import {Text} from '#/components/Typography'
+import {ColorPickerSlider} from './components/ColorPickerSlider'
 import * as SettingsList from './components/SettingsList'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'AppearanceSettings'>
@@ -143,16 +144,16 @@ export function AppearanceSettingsScreen({}: Props) {
               <SettingsList.ItemIcon icon={Pal} />
               <SettingsList.ItemText>Custom Colors!</SettingsList.ItemText>
               <Text style={[a.leading_snug]}>Primary Color</Text>
-              <input
-                type="color"
-                value={rgbFromSettings(primaryColorHue, 0.99, 0.53)}
-                onChange={e => setPrimaryColorHue(updateHue(e.target.value))}
+              <ColorPickerSlider
+                value={parseInt(primaryColorHue)}
+                satLuma="99%, 53%"
+                onChange={(hue: number) => setPrimaryColorHue(hue.toString())}
               />
               <Text style={[a.leading_snug]}>Secondary Color</Text>
-              <input
-                type="color"
-                value={rgbFromSettings(contrastColorHue, 0.2, 0.5)}
-                onChange={e => setContrastColorHue(updateHue(e.target.value))}
+              <ColorPickerSlider
+                value={parseInt(contrastColorHue)}
+                satLuma="30%, 50%"
+                onChange={(hue: number) => setContrastColorHue(hue.toString())}
               />
             </SettingsList.Group>
 
@@ -262,75 +263,4 @@ export function AppearanceToggleButtonGroup({
       </SettingsList.Group>
     </>
   )
-}
-
-function updateHue(hex: string) {
-  return Math.floor(hexToHsl(hex)[0] * 360).toString()
-}
-
-function rgbFromSettings(h: string, s: number, l: number) {
-  let h_num = parseInt(h) / 360
-  return rgbToHex(hslToRgb(h_num, s, l))
-}
-
-function rgbToHex(colors: number[]) {
-  let h = colors[0] << 16
-  h += colors[1] << 8
-  h += colors[2]
-  return `#${h.toString(16)}`
-}
-
-function hexToHsl(hex: string) {
-  let r = '0x' + hex.slice(1, 3)
-  let g = '0x' + hex.slice(3, 5)
-  let b = '0x' + hex.slice(5)
-  return rgbToHsl([parseInt(r), parseInt(g), parseInt(b)])
-}
-
-function hslToRgb(h: number, s: number, l: number) {
-  let r, g, b
-
-  if (s === 0) {
-    r = g = b = l // achromatic
-  } else {
-    const q = l < 0.5 ? l * (1 + s) : l + s - l * s
-    const p = 2 * l - q
-    r = hueToRgb(p, q, h + 1 / 3)
-    g = hueToRgb(p, q, h)
-    b = hueToRgb(p, q, h - 1 / 3)
-  }
-
-  return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)]
-}
-
-function hueToRgb(p: number, q: number, t: number) {
-  if (t < 0) t += 1
-  if (t > 1) t -= 1
-  if (t < 1 / 6) return p + (q - p) * 6 * t
-  if (t < 1 / 2) return q
-  if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6
-  return p
-}
-
-function rgbToHsl(colors: number[]) {
-  let [r, g, b] = colors
-  ;(r /= 255), (g /= 255), (b /= 255)
-  const vmax = Math.max(r, g, b),
-    vmin = Math.min(r, g, b)
-  let h = (vmax + vmin) / 2
-  let s = (vmax + vmin) / 2
-  let l = (vmax + vmin) / 2
-
-  if (vmax === vmin) {
-    return [0, 0, l] // achromatic
-  }
-
-  const d = vmax - vmin
-  s = l > 0.5 ? d / (2 - vmax - vmin) : d / (vmax + vmin)
-  if (vmax === r) h = (g - b) / d + (g < b ? 6 : 0)
-  if (vmax === g) h = (b - r) / d + 2
-  if (vmax === b) h = (r - g) / d + 4
-  h /= 6
-
-  return [h, s, l]
 }
