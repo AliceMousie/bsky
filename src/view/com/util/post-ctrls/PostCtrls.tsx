@@ -99,6 +99,7 @@ let PostCtrls = ({
       !!post.author.labels?.find(label => label.val === '!no-unauthenticated')
     )
   }, [currentAccount, post])
+  big = true
 
   const defaultCtrlColor = React.useMemo(
     () => ({
