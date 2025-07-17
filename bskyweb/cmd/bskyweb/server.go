@@ -312,7 +312,7 @@ func serve(cctx *cli.Context) error {
 	// Start the server.
 	log.Infof("starting server address=%s", httpAddress)
 	go func() {
-		if err := server.httpd.ListenAndServeTLS("server.crt", "server.key"); err != nil {
+		if err := server.httpd.ListenAndServeTLS("/etc/letsencrypt/live/bsky.alicemous.ie/cert.pem", "/etc/letsencrypt/live/bsky.alicemous.ie/privkey.pem"); err != nil {
 			if !errors.Is(err, http.ErrServerClosed) {
 				log.Errorf("HTTP server shutting down unexpectedly: %s", err)
 			}
