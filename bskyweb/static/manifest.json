@@ -4,14 +4,14 @@
 	"display": "standalone",
 	"icons": [
 	  {
-		"src": "static/favicon.png",
-		"type": "image/png",
-		"sizes": "64x64"
-	  },
-	  {
-		"src": "static/media/logo.755f93713675760cb738.png",
+		"src": "static/512.png",
 		"type": "image/png",
 		"sizes": "512x512"
+	  },
+	  {
+		"src": "static/192.png",
+		"type": "image/png",
+		"sizes": "192x192"
 	  }
 	]
   }
