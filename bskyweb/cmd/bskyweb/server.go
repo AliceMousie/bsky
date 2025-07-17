@@ -212,9 +212,9 @@ func serve(cctx *cli.Context) error {
 	e.GET("/security.txt", func(c echo.Context) error {
 		return c.Redirect(http.StatusMovedPermanently, "/.well-known/security.txt")
 	})
-	// e.GET("/apple-touch-icon.png", func(c echo.Context) error {
-	// 	return c.Redirect(http.StatusMovedPermanently, "/static/apple-touch-icon.png")
-	// })
+	e.GET("/favicon.ico", func(c echo.Context) error {
+		return c.Redirect(http.StatusMovedPermanently, "/static/apple-touch-icon.png")
+	})
 	// e.GET("/apple-touch-icon-precomposed.png", func(c echo.Context) error {
 	// 	return c.Redirect(http.StatusMovedPermanently, "/static/apple-touch-icon.png")
 	// })
