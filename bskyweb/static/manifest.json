@@ -1,0 +1,13 @@
+{
+	"name": "bsky",
+	"start_url": "https://bsky.alicemous.ie",
+	"display": "standalone",
+	"icons": [
+	  {
+		"src": "favicon.png",
+		"type": "image/png",
+		"sizes": "64x64"
+	  }
+	]
+  }
+  
