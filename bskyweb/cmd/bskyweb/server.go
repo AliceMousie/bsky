@@ -214,6 +214,9 @@ func serve(cctx *cli.Context) error {
 	e.GET("/apple-touch-icon.png", func(c echo.Context) error {
 		return c.Redirect(http.StatusMovedPermanently, "/static/apple-touch-icon.png")
 	})
+	e.GET("/apple-touch-icon-precomposed.png", func(c echo.Context) error {
+		return c.Redirect(http.StatusMovedPermanently, "/static/apple-touch-icon.png")
+	})
 	e.GET("/iframe/youtube.html", echo.WrapHandler(staticHandler))
 	e.GET("/static/*", echo.WrapHandler(http.StripPrefix("/static/", staticHandler)), func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
