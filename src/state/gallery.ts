@@ -230,10 +230,10 @@ export async function compressImage(img: ComposerImage): Promise<ImageMeta> {
 
     if (base64 !== undefined && getDataUriSize(base64) <= POST_IMG_MAX.size) {
       return {
-        path: await moveIfNecessary(res.uri),
+        path: source.path, //await moveIfNecessary(res.uri),
         width: res.width,
         height: res.height,
-        mime: 'image/jpeg',
+        mime: 'image/png',
       }
     }
 
