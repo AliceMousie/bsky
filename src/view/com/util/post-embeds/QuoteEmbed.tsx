@@ -60,6 +60,7 @@ export function MaybeQuoteEmbed({
   const t = useTheme()
   const pal = usePalette('default')
   const {currentAccount} = useSession()
+  console.log(embed)
   if (
     AppBskyEmbedRecord.isViewRecord(embed.record) &&
     AppBskyFeedPost.isRecord(embed.record.value) &&
