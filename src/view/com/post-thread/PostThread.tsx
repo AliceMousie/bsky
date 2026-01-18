@@ -421,6 +421,7 @@ export function PostThread({uri}: {uri: string | undefined}) {
           ]}>
           <Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>
             <Trans>Blocked post.</Trans>
+            {JSON.stringify(item)}
           </Text>
         </View>
       )
