@@ -460,7 +460,7 @@ export function Explore() {
       }
     }
 
-    return i
+    return []
   }, [
     _,
     profiles,
