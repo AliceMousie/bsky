@@ -557,6 +557,7 @@ let PostThreadItemLoaded = ({
                     backgroundColor: 'transparent',
                     marginLeft: '-8px',
                     marginRight: '10px',
+                    lineBreak: 'loose',
                   }}>
                   {isCollapsed ? '[+]' : '[-]'}
                 </button>
