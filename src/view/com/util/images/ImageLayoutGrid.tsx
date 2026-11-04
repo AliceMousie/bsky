@@ -60,6 +60,12 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
   const containerRef2 = useHandleRef()
   const containerRef3 = useHandleRef()
   const containerRef4 = useHandleRef()
+  const containerRef5 = useHandleRef()
+  const containerRef6 = useHandleRef()
+  const containerRef7 = useHandleRef()
+  const containerRef8 = useHandleRef()
+  const containerRef9 = useHandleRef()
+  const containerRef10 = useHandleRef()
   const thumbDimsRef = React.useRef<(Dimensions | null)[]>([])
 
   switch (count) {
@@ -203,8 +209,42 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
       )
     }
 
-    default:
+    case 0:
       return null
+
+    default: {
+      const containerRefs = [
+        containerRef1,
+        containerRef2,
+        containerRef3,
+        containerRef4,
+        containerRef5,
+        containerRef6,
+        containerRef7,
+        containerRef8,
+        containerRef9,
+        containerRef10,
+      ]
+      return (
+        <>
+          <View style={[{flexDirection: 'row', flexWrap: 'wrap'}]}>
+            {props.images.map((_img, i) => (
+              <View
+                style={[{width: 'calc(50% - 3px)', padding: '3px'} as any]}
+                key={'image_' + i}>
+                <GalleryItem
+                  {...props}
+                  index={i}
+                  insetBorderStyle={noCorners([])}
+                  containerRefs={containerRefs}
+                  thumbDimsRef={thumbDimsRef}
+                />
+              </View>
+            ))}
+          </View>
+        </>
+      )
+    }
   }
 }
 

@@ -82,7 +82,7 @@ export function MaybeQuoteEmbed({
         <InfoCircleIcon size={18} style={pal.text} />
         <Text type="lg" style={pal.text}>
           <Trans>Blocked</Trans>
-          {JSON.stringify(embed)}
+          <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(embed)}</div>
         </Text>
       </View>
     )
@@ -93,7 +93,7 @@ export function MaybeQuoteEmbed({
         <InfoCircleIcon size={18} style={pal.text} />
         <Text type="lg" style={pal.text}>
           <Trans>Deleted</Trans>
-          {JSON.stringify(embed)}
+          <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(embed)}</div>
         </Text>
       </View>
     )
@@ -111,7 +111,7 @@ export function MaybeQuoteEmbed({
           ) : (
             <Trans>Removed by author</Trans>
           )}
-          {JSON.stringify(embed)}
+          <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(embed)}</div>
         </Text>
       </View>
     )

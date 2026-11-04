@@ -407,6 +407,7 @@ export function PostThread({uri}: {uri: string | undefined}) {
           ]}>
           <Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>
             <Trans>Deleted post.</Trans>
+            <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(item)}</div>
           </Text>
         </View>
       )
@@ -419,9 +420,15 @@ export function PostThread({uri}: {uri: string | undefined}) {
             t.atoms.border_contrast_low,
             t.atoms.bg_contrast_25,
           ]}>
-          <Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>
+          <Text
+            style={[
+              a.font_bold,
+              a.text_md,
+              t.atoms.text_contrast_medium,
+              {overflowWrap: 'anywhere'} as any,
+            ]}>
             <Trans>Blocked post.</Trans>
-            {JSON.stringify(item)}
+            <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(item)}</div>
           </Text>
         </View>
       )

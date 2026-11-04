@@ -1,6 +1,6 @@
 import React from 'react'
 import {Pressable, StyleProp, View, ViewStyle} from 'react-native'
-import {Image, ImageStyle} from 'expo-image'
+import {ImageStyle} from 'expo-image'
 import {AppBskyEmbedImages} from '@atproto/api'
 import {msg} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
@@ -10,7 +10,6 @@ import {Dimensions} from '#/lib/media/types'
 import {useLargeAltBadgeEnabled} from '#/state/preferences/large-alt-badge'
 import {PostEmbedViewContext} from '#/view/com/util/post-embeds/types'
 import {atoms as a, useTheme} from '#/alf'
-import {MediaInsetBorder} from '#/components/MediaInsetBorder'
 import {Text} from '#/components/Typography'
 
 type EventFunction = (index: number) => void
@@ -51,8 +50,12 @@ export function GalleryItem({
   const hasAlt = !!image.alt
   const hideBadges =
     viewContext === PostEmbedViewContext.FeedEmbedRecordWithMedia
+  let _ = insetBorderStyle
   return (
-    <View style={a.flex_1} ref={containerRefs[index]} collapsable={false}>
+    <View
+      ref={containerRefs[index]}
+      // style={a.flex_1}
+      collapsable={false}>
       <Pressable
         onPress={
           onPress
@@ -62,15 +65,15 @@ export function GalleryItem({
         onPressIn={onPressIn ? () => onPressIn(index) : undefined}
         onLongPress={onLongPress ? () => onLongPress(index) : undefined}
         style={[
-          a.flex_1,
-          a.overflow_hidden,
+          //   a.flex_1,
+          //   a.overflow_hidden,
           t.atoms.bg_contrast_25,
           imageStyle,
         ]}
         accessibilityRole="button"
         accessibilityLabel={image.alt || _(msg`Image`)}
         accessibilityHint="">
-        <Image
+        {/* <Image
           source={{uri: image.thumb}}
           style={[a.flex_1]}
           accessible={true}
@@ -83,17 +86,18 @@ export function GalleryItem({
               height: e.source.height,
             }
           }}
-        />
-        <MediaInsetBorder style={insetBorderStyle} />
+        /> */}
+        <img src={image.thumb} />
+        {/* <MediaInsetBorder style={insetBorderStyle} /> */}
       </Pressable>
       {hasAlt && !hideBadges ? (
         <View
           accessible={false}
           style={[
-            a.absolute,
+            // a.absolute,
             a.flex_row,
             a.align_center,
-            a.rounded_xs,
+            // a.rounded_xs,
             t.atoms.bg_contrast_25,
             {
               gap: 3,

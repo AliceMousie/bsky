@@ -217,6 +217,92 @@ export function PostEmbeds({
     }
   }
 
+  if (embed?.$type === 'app.bsky.embed.gallery#view') {
+    const images = (embed.items as any[]).map(i => ({...i, thumb: i.thumbnail}))
+
+    if (images.length > 0) {
+      const items = images.map(img => ({
+        uri: img.fullsize,
+        thumbUri: img.thumb,
+        alt: img.alt,
+        dimensions: img.aspectRatio ?? null,
+      }))
+      const _openLightbox = (
+        index: number,
+        thumbRects: (MeasuredDimensions | null)[],
+        fetchedDims: (Dimensions | null)[],
+      ) => {
+        openLightbox({
+          images: items.map((item, i) => ({
+            ...item,
+            thumbRect: thumbRects[i] ?? null,
+            thumbDimensions: fetchedDims[i] ?? null,
+            type: 'image',
+          })),
+          index,
+        })
+      }
+      const onPress = (
+        index: number,
+        refs: HandleRef[],
+        fetchedDims: (Dimensions | null)[],
+      ) => {
+        const handles = refs.map(r => r.current)
+        runOnUI(() => {
+          'worklet'
+          const rects = handles.map(measureHandle)
+          runOnJS(_openLightbox)(index, rects, fetchedDims)
+        })()
+      }
+      const onPressIn = (_: number) => {
+        InteractionManager.runAfterInteractions(() => {
+          Image.prefetch(items.map(i => i.uri))
+        })
+      }
+
+      if (images.length === 1) {
+        const image = images[0]
+        return (
+          <ContentHider modui={moderation?.ui('contentMedia')}>
+            <View style={[a.mt_sm, style]}>
+              <AutoSizedImage
+                crop={
+                  viewContext === PostEmbedViewContext.ThreadHighlighted
+                    ? 'none'
+                    : viewContext ===
+                      PostEmbedViewContext.FeedEmbedRecordWithMedia
+                    ? 'square'
+                    : 'constrained'
+                }
+                image={image}
+                onPress={(containerRef, dims) =>
+                  onPress(0, [containerRef], [dims])
+                }
+                onPressIn={() => onPressIn(0)}
+                hideBadge={
+                  viewContext === PostEmbedViewContext.FeedEmbedRecordWithMedia
+                }
+              />
+            </View>
+          </ContentHider>
+        )
+      }
+
+      return (
+        <ContentHider modui={moderation?.ui('contentMedia')}>
+          <View style={[a.mt_sm, style]}>
+            <ImageLayoutGrid
+              images={images}
+              onPress={onPress}
+              onPressIn={onPressIn}
+              viewContext={viewContext}
+            />
+          </View>
+        </ContentHider>
+      )
+    }
+  }
+
   // external link embed
   // =
   if (AppBskyEmbedExternal.isView(embed)) {

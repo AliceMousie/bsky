@@ -269,6 +269,26 @@ let ProfileHeaderStandard = ({
                   />
                 </View>
               )}
+
+            {profile?.links ? (
+              <View style={[{display: 'flex', flexDirection: 'row'}]}>
+                {(profile.links as ProfileLink[]).map(link => (
+                  <Button
+                    key={link.cid as any}
+                    label={link.title as any}
+                    size="small"
+                    color="secondary"
+                    variant="solid"
+                    style={[a.rounded_sm]}
+                    onPress={() => window.open(link.url as any)}>
+                    {link.icon ? (
+                      <img src={link.icon as any} style={{height: '24px'}} />
+                    ) : null}
+                    <ButtonText>{link.title}</ButtonText>
+                  </Button>
+                ))}
+              </View>
+            ) : null}
           </View>
         )}
       </View>
@@ -289,3 +309,11 @@ let ProfileHeaderStandard = ({
 }
 ProfileHeaderStandard = memo(ProfileHeaderStandard)
 export {ProfileHeaderStandard}
+
+interface ProfileLink {
+  uri: String
+  cid: String
+  url: String
+  title: String
+  icon?: String
+}
