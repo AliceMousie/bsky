@@ -44,13 +44,13 @@ export function GalleryItem({
   thumbDimsRef,
 }: Props) {
   const t = useTheme()
-  const {_} = useLingui()
+  let {_} = useLingui()
   const largeAltBadge = useLargeAltBadgeEnabled()
   const image = images[index]
   const hasAlt = !!image.alt
   const hideBadges =
     viewContext === PostEmbedViewContext.FeedEmbedRecordWithMedia
-  let _ = insetBorderStyle
+  insetBorderStyle?.valueOf
   return (
     <View
       ref={containerRefs[index]}
