@@ -53,7 +53,7 @@ interface ImageLayoutGridInnerProps {
 }
 
 function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
-  const gap = props.gap
+  //   const gap = props.gap
   const count = props.images.length
 
   const containerRef1 = useHandleRef()
@@ -69,145 +69,145 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
   const thumbDimsRef = React.useRef<(Dimensions | null)[]>([])
 
   switch (count) {
-    case 2: {
-      const containerRefs = [containerRef1, containerRef2]
-      return (
-        <View style={[a.flex_1, a.flex_row, gap]}>
-          <View style={[a.flex_1, {aspectRatio: 1}]}>
-            <GalleryItem
-              {...props}
-              index={0}
-              insetBorderStyle={noCorners(['topRight', 'bottomRight'])}
-              containerRefs={containerRefs}
-              thumbDimsRef={thumbDimsRef}
-            />
-          </View>
-          <View style={[a.flex_1, {aspectRatio: 1}]}>
-            <GalleryItem
-              {...props}
-              index={1}
-              insetBorderStyle={noCorners(['topLeft', 'bottomLeft'])}
-              containerRefs={containerRefs}
-              thumbDimsRef={thumbDimsRef}
-            />
-          </View>
-        </View>
-      )
-    }
+    // case 2: {
+    //   const containerRefs = [containerRef1, containerRef2]
+    //   return (
+    //     <View style={[a.flex_1, a.flex_row, gap]}>
+    //       <View style={[a.flex_1, {aspectRatio: 1}]}>
+    //         <GalleryItem
+    //           {...props}
+    //           index={0}
+    //           insetBorderStyle={noCorners(['topRight', 'bottomRight'])}
+    //           containerRefs={containerRefs}
+    //           thumbDimsRef={thumbDimsRef}
+    //         />
+    //       </View>
+    //       <View style={[a.flex_1, {aspectRatio: 1}]}>
+    //         <GalleryItem
+    //           {...props}
+    //           index={1}
+    //           insetBorderStyle={noCorners(['topLeft', 'bottomLeft'])}
+    //           containerRefs={containerRefs}
+    //           thumbDimsRef={thumbDimsRef}
+    //         />
+    //       </View>
+    //     </View>
+    //   )
+    // }
 
-    case 3: {
-      const containerRefs = [containerRef1, containerRef2, containerRef3]
-      return (
-        <View style={[a.flex_1, a.flex_row, gap]}>
-          <View style={[a.flex_1, {aspectRatio: 1}]}>
-            <GalleryItem
-              {...props}
-              index={0}
-              insetBorderStyle={noCorners(['topRight', 'bottomRight'])}
-              containerRefs={containerRefs}
-              thumbDimsRef={thumbDimsRef}
-            />
-          </View>
-          <View style={[a.flex_1, {aspectRatio: 1}, gap]}>
-            <View style={[a.flex_1]}>
-              <GalleryItem
-                {...props}
-                index={1}
-                insetBorderStyle={noCorners([
-                  'topLeft',
-                  'bottomLeft',
-                  'bottomRight',
-                ])}
-                containerRefs={containerRefs}
-                thumbDimsRef={thumbDimsRef}
-              />
-            </View>
-            <View style={[a.flex_1]}>
-              <GalleryItem
-                {...props}
-                index={2}
-                insetBorderStyle={noCorners([
-                  'topLeft',
-                  'bottomLeft',
-                  'topRight',
-                ])}
-                containerRefs={containerRefs}
-                thumbDimsRef={thumbDimsRef}
-              />
-            </View>
-          </View>
-        </View>
-      )
-    }
+    // case 3: {
+    //   const containerRefs = [containerRef1, containerRef2, containerRef3]
+    //   return (
+    //     <View style={[a.flex_1, a.flex_row, gap]}>
+    //       <View style={[a.flex_1, {aspectRatio: 1}]}>
+    //         <GalleryItem
+    //           {...props}
+    //           index={0}
+    //           insetBorderStyle={noCorners(['topRight', 'bottomRight'])}
+    //           containerRefs={containerRefs}
+    //           thumbDimsRef={thumbDimsRef}
+    //         />
+    //       </View>
+    //       <View style={[a.flex_1, {aspectRatio: 1}, gap]}>
+    //         <View style={[a.flex_1]}>
+    //           <GalleryItem
+    //             {...props}
+    //             index={1}
+    //             insetBorderStyle={noCorners([
+    //               'topLeft',
+    //               'bottomLeft',
+    //               'bottomRight',
+    //             ])}
+    //             containerRefs={containerRefs}
+    //             thumbDimsRef={thumbDimsRef}
+    //           />
+    //         </View>
+    //         <View style={[a.flex_1]}>
+    //           <GalleryItem
+    //             {...props}
+    //             index={2}
+    //             insetBorderStyle={noCorners([
+    //               'topLeft',
+    //               'bottomLeft',
+    //               'topRight',
+    //             ])}
+    //             containerRefs={containerRefs}
+    //             thumbDimsRef={thumbDimsRef}
+    //           />
+    //         </View>
+    //       </View>
+    //     </View>
+    //   )
+    // }
 
-    case 4: {
-      const containerRefs = [
-        containerRef1,
-        containerRef2,
-        containerRef3,
-        containerRef4,
-      ]
-      return (
-        <>
-          <View style={[a.flex_row, gap]}>
-            <View style={[a.flex_1, {aspectRatio: 1.5}]}>
-              <GalleryItem
-                {...props}
-                index={0}
-                insetBorderStyle={noCorners([
-                  'bottomLeft',
-                  'topRight',
-                  'bottomRight',
-                ])}
-                containerRefs={containerRefs}
-                thumbDimsRef={thumbDimsRef}
-              />
-            </View>
-            <View style={[a.flex_1, {aspectRatio: 1.5}]}>
-              <GalleryItem
-                {...props}
-                index={1}
-                insetBorderStyle={noCorners([
-                  'topLeft',
-                  'bottomLeft',
-                  'bottomRight',
-                ])}
-                containerRefs={containerRefs}
-                thumbDimsRef={thumbDimsRef}
-              />
-            </View>
-          </View>
-          <View style={[a.flex_row, gap]}>
-            <View style={[a.flex_1, {aspectRatio: 1.5}]}>
-              <GalleryItem
-                {...props}
-                index={2}
-                insetBorderStyle={noCorners([
-                  'topLeft',
-                  'topRight',
-                  'bottomRight',
-                ])}
-                containerRefs={containerRefs}
-                thumbDimsRef={thumbDimsRef}
-              />
-            </View>
-            <View style={[a.flex_1, {aspectRatio: 1.5}]}>
-              <GalleryItem
-                {...props}
-                index={3}
-                insetBorderStyle={noCorners([
-                  'topLeft',
-                  'bottomLeft',
-                  'topRight',
-                ])}
-                containerRefs={containerRefs}
-                thumbDimsRef={thumbDimsRef}
-              />
-            </View>
-          </View>
-        </>
-      )
-    }
+    // case 4: {
+    //   const containerRefs = [
+    //     containerRef1,
+    //     containerRef2,
+    //     containerRef3,
+    //     containerRef4,
+    //   ]
+    //   return (
+    //     <>
+    //       <View style={[a.flex_row, gap]}>
+    //         <View style={[a.flex_1, {aspectRatio: 1.5}]}>
+    //           <GalleryItem
+    //             {...props}
+    //             index={0}
+    //             insetBorderStyle={noCorners([
+    //               'bottomLeft',
+    //               'topRight',
+    //               'bottomRight',
+    //             ])}
+    //             containerRefs={containerRefs}
+    //             thumbDimsRef={thumbDimsRef}
+    //           />
+    //         </View>
+    //         <View style={[a.flex_1, {aspectRatio: 1.5}]}>
+    //           <GalleryItem
+    //             {...props}
+    //             index={1}
+    //             insetBorderStyle={noCorners([
+    //               'topLeft',
+    //               'bottomLeft',
+    //               'bottomRight',
+    //             ])}
+    //             containerRefs={containerRefs}
+    //             thumbDimsRef={thumbDimsRef}
+    //           />
+    //         </View>
+    //       </View>
+    //       <View style={[a.flex_row, gap]}>
+    //         <View style={[a.flex_1, {aspectRatio: 1.5}]}>
+    //           <GalleryItem
+    //             {...props}
+    //             index={2}
+    //             insetBorderStyle={noCorners([
+    //               'topLeft',
+    //               'topRight',
+    //               'bottomRight',
+    //             ])}
+    //             containerRefs={containerRefs}
+    //             thumbDimsRef={thumbDimsRef}
+    //           />
+    //         </View>
+    //         <View style={[a.flex_1, {aspectRatio: 1.5}]}>
+    //           <GalleryItem
+    //             {...props}
+    //             index={3}
+    //             insetBorderStyle={noCorners([
+    //               'topLeft',
+    //               'bottomLeft',
+    //               'topRight',
+    //             ])}
+    //             containerRefs={containerRefs}
+    //             thumbDimsRef={thumbDimsRef}
+    //           />
+    //         </View>
+    //       </View>
+    //     </>
+    //   )
+    // }
 
     case 0:
       return null
