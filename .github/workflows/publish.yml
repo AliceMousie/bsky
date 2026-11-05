@@ -1,0 +1,36 @@
+name: Build web
+
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build and Push
+    steps:
+      - name: git-checkout
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+      - name: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install all dependencies
+        run: yarn
+
+      - name: Build
+        run: yarn build-web
+
+      - shell: bash
+        run: |
+          zip -r bskyweb.zip bskyweb
+
+      - name: Release zip
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          name: build
+          tag_name: build
+          files: bskyweb.zip
+          fail_on_unmatched_files: true
