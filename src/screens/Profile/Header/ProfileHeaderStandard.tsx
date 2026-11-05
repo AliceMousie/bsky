@@ -271,7 +271,10 @@ let ProfileHeaderStandard = ({
               )}
 
             {profile?.links ? (
-              <View style={[{display: 'flex', flexDirection: 'row'}]}>
+              <View
+                style={[
+                  {display: 'flex', flexDirection: 'row', flexWrap: 'wrap'},
+                ]}>
                 {(profile.links as ProfileLink[]).map(link => (
                   <Button
                     key={link.cid as any}
