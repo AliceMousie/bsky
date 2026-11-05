@@ -60,7 +60,7 @@ export function MaybeQuoteEmbed({
   const t = useTheme()
   const pal = usePalette('default')
   const {currentAccount} = useSession()
-  console.log(embed)
+  //console.log(embed)
   if (
     AppBskyEmbedRecord.isViewRecord(embed.record) &&
     AppBskyFeedPost.isRecord(embed.record.value) &&
@@ -76,24 +76,62 @@ export function MaybeQuoteEmbed({
       />
     )
   } else if (AppBskyEmbedRecord.isViewBlocked(embed.record)) {
+    let href = (embed as any)?.record?.uri
+      ?.replace('at:/', '/profile')
+      .replace('app.bsky.feed.', '')
+    let href2 = href?.replace(/\/post.+/, '')
     return (
       <View
         style={[styles.errorContainer, a.border, t.atoms.border_contrast_low]}>
         <InfoCircleIcon size={18} style={pal.text} />
         <Text type="lg" style={pal.text}>
           <Trans>Blocked</Trans>
-          <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(embed)}</div>
+          {/* <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(embed)}</div> */}
+          {!!href && (
+            <>
+              <Link href={href} title="Post Link">
+                <Text
+                  style={{
+                    color: t.palette.primary_500,
+                  }}>
+                  Post Link
+                </Text>
+              </Link>{' '}
+              /{' '}
+              <Link href={href2} title="Profile Link">
+                <Text
+                  style={{
+                    color: t.palette.primary_500,
+                  }}>
+                  Profile Link
+                </Text>
+              </Link>
+            </>
+          )}
         </Text>
       </View>
     )
   } else if (AppBskyEmbedRecord.isViewNotFound(embed.record)) {
+    let href = (embed as any)?.record?.uri
+      ?.replace('at:/', '/profile')
+      .replace(/\/app.+/, '')
     return (
       <View
         style={[styles.errorContainer, a.border, t.atoms.border_contrast_low]}>
         <InfoCircleIcon size={18} style={pal.text} />
         <Text type="lg" style={pal.text}>
           <Trans>Deleted</Trans>
-          <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(embed)}</div>
+          {/* <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(embed)}</div> */}
+          {!!href && (
+            <Link href={href} title="Profile Link">
+              <Text
+                style={{
+                  color: t.palette.primary_500,
+                }}>
+                Profile Link
+              </Text>
+            </Link>
+          )}
         </Text>
       </View>
     )
@@ -101,6 +139,9 @@ export function MaybeQuoteEmbed({
     const isViewerOwner = currentAccount?.did
       ? embed.record.uri.includes(currentAccount.did)
       : false
+    let href = (embed as any)?.record?.uri
+      ?.replace('at:/', '/profile')
+      .replace(/\/app.+/, '')
     return (
       <View
         style={[styles.errorContainer, a.border, t.atoms.border_contrast_low]}>
@@ -111,7 +152,17 @@ export function MaybeQuoteEmbed({
           ) : (
             <Trans>Removed by author</Trans>
           )}
-          <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(embed)}</div>
+          {/* <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(embed)}</div> */}
+          {!!href && (
+            <Link href={href} title="Profile Link">
+              <Text
+                style={{
+                  color: t.palette.primary_500,
+                }}>
+                Profile Link
+              </Text>
+            </Link>
+          )}
         </Text>
       </View>
     )

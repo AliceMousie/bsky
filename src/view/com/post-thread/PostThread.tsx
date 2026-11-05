@@ -33,6 +33,7 @@ import {useSession} from '#/state/session'
 import {useComposerControls} from '#/state/shell'
 import {useMergedThreadgateHiddenReplies} from '#/state/threadgate-hidden-replies'
 import {atoms as a, useTheme} from '#/alf'
+import {Link} from '#/components/Link'
 import {ListFooter, ListMaybePlaceholder} from '#/components/Lists'
 import {Text} from '#/components/Typography'
 import {List, ListMethods} from '../util/List'
@@ -397,6 +398,9 @@ export function PostThread({uri}: {uri: string | undefined}) {
         />
       )
     } else if (isThreadNotFound(item)) {
+      let href = (item as any)?.record?.uri
+        ?.replace('at:/', '/profile')
+        .replace(/\/app.+/, '')
       return (
         <View
           style={[
@@ -407,11 +411,25 @@ export function PostThread({uri}: {uri: string | undefined}) {
           ]}>
           <Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>
             <Trans>Deleted post.</Trans>
-            <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(item)}</div>
+            {/* <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(item)}</div> */}
+            {!!href && (
+              <Link to={href} label="Profile Link">
+                <Text
+                  style={{
+                    color: t.palette.primary_500,
+                  }}>
+                  Profile Link
+                </Text>
+              </Link>
+            )}
           </Text>
         </View>
       )
     } else if (isThreadBlocked(item)) {
+      let href = (item as any)?.record?.uri
+        ?.replace('at:/', '/profile')
+        .replace('app.bsky.feed.', '')
+      let href2 = href?.replace(/\/post.+/, '')
       return (
         <View
           style={[
@@ -420,15 +438,30 @@ export function PostThread({uri}: {uri: string | undefined}) {
             t.atoms.border_contrast_low,
             t.atoms.bg_contrast_25,
           ]}>
-          <Text
-            style={[
-              a.font_bold,
-              a.text_md,
-              t.atoms.text_contrast_medium,
-              {overflowWrap: 'anywhere'} as any,
-            ]}>
+          <Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>
             <Trans>Blocked post.</Trans>
-            <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(item)}</div>
+            {/* <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(item)}</div> */}
+            {!!href && (
+              <>
+                <Link to={href} label="Post Link">
+                  <Text
+                    style={{
+                      color: t.palette.primary_500,
+                    }}>
+                    Post Link
+                  </Text>
+                </Link>{' '}
+                /{' '}
+                <Link to={href2} label="Profile Link">
+                  <Text
+                    style={{
+                      color: t.palette.primary_500,
+                    }}>
+                    Profile Link
+                  </Text>
+                </Link>
+              </>
+            )}
           </Text>
         </View>
       )
