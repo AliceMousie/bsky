@@ -413,14 +413,16 @@ export function PostThread({uri}: {uri: string | undefined}) {
             <Trans>Deleted post.</Trans>
             {/* <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(item)}</div> */}
             {!!href && (
-              <Link to={href} label="Profile Link">
-                <Text
-                  style={{
-                    color: t.palette.primary_500,
-                  }}>
-                  Profile Link
-                </Text>
-              </Link>
+              <div>
+                <Link to={href} label="Profile Link">
+                  <Text
+                    style={{
+                      color: t.palette.primary_500,
+                    }}>
+                    Profile Link
+                  </Text>
+                </Link>
+              </div>
             )}
           </Text>
         </View>
@@ -442,7 +444,7 @@ export function PostThread({uri}: {uri: string | undefined}) {
             <Trans>Blocked post.</Trans>
             {/* <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(item)}</div> */}
             {!!href && (
-              <>
+              <div>
                 <Link to={href} label="Post Link">
                   <Text
                     style={{
@@ -450,8 +452,8 @@ export function PostThread({uri}: {uri: string | undefined}) {
                     }}>
                     Post Link
                   </Text>
-                </Link>{' '}
-                /{' '}
+                </Link>
+                <Text> / </Text>
                 <Link to={href2} label="Profile Link">
                   <Text
                     style={{
@@ -460,7 +462,7 @@ export function PostThread({uri}: {uri: string | undefined}) {
                     Profile Link
                   </Text>
                 </Link>
-              </>
+              </div>
             )}
           </Text>
         </View>

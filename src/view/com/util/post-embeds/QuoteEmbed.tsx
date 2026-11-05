@@ -88,7 +88,7 @@ export function MaybeQuoteEmbed({
           <Trans>Blocked</Trans>
           {/* <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(embed)}</div> */}
           {!!href && (
-            <>
+            <div>
               <Link href={href} title="Post Link">
                 <Text
                   style={{
@@ -96,8 +96,8 @@ export function MaybeQuoteEmbed({
                   }}>
                   Post Link
                 </Text>
-              </Link>{' '}
-              /{' '}
+              </Link>
+              <Text> / </Text>
               <Link href={href2} title="Profile Link">
                 <Text
                   style={{
@@ -106,7 +106,7 @@ export function MaybeQuoteEmbed({
                   Profile Link
                 </Text>
               </Link>
-            </>
+            </div>
           )}
         </Text>
       </View>
@@ -123,14 +123,16 @@ export function MaybeQuoteEmbed({
           <Trans>Deleted</Trans>
           {/* <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(embed)}</div> */}
           {!!href && (
-            <Link href={href} title="Profile Link">
-              <Text
-                style={{
-                  color: t.palette.primary_500,
-                }}>
-                Profile Link
-              </Text>
-            </Link>
+            <div>
+              <Link href={href} title="Profile Link">
+                <Text
+                  style={{
+                    color: t.palette.primary_500,
+                  }}>
+                  Profile Link
+                </Text>
+              </Link>
+            </div>
           )}
         </Text>
       </View>
@@ -154,14 +156,16 @@ export function MaybeQuoteEmbed({
           )}
           {/* <div style={{overflowWrap: 'anywhere'}}>{JSON.stringify(embed)}</div> */}
           {!!href && (
-            <Link href={href} title="Profile Link">
-              <Text
-                style={{
-                  color: t.palette.primary_500,
-                }}>
-                Profile Link
-              </Text>
-            </Link>
+            <div>
+              <Link href={href} title="Profile Link">
+                <Text
+                  style={{
+                    color: t.palette.primary_500,
+                  }}>
+                  Profile Link
+                </Text>
+              </Link>
+            </div>
           )}
         </Text>
       </View>
