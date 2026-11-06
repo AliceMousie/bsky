@@ -46,11 +46,27 @@ export function ProfileHeaderHandle({
                 a.rounded_xs,
                 {borderColor: t.palette.contrast_200},
               ]
-            : [a.text_md, a.leading_snug, t.atoms.text_contrast_medium],
+            : [
+                a.text_md,
+                a.leading_snug,
+                t.atoms.text_contrast_medium,
+                {flexShrink: '1'},
+              ],
           web({wordBreak: 'break-all'}),
         ]}>
         {invalidHandle ? _(msg`⚠Invalid Handle`) : `@${profile.handle}`}
       </Text>
+      {(profile as any)?.pronouns ? (
+        <Text
+          style={[
+            a.text_md,
+            a.leading_snug,
+            t.atoms.text_contrast_medium,
+            {marginLeft: '0.5rem', flexShrink: '0'} as any,
+          ]}>
+          {(profile as any).pronouns}
+        </Text>
+      ) : undefined}
     </View>
   )
 }

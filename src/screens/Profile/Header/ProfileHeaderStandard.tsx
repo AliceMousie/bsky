@@ -22,10 +22,11 @@ import {
 import {useRequireAuth, useSession} from '#/state/session'
 import {ProfileMenu} from '#/view/com/profile/ProfileMenu'
 import * as Toast from '#/view/com/util/Toast'
-import {atoms as a} from '#/alf'
+import {atoms as a, useTheme} from '#/alf'
 import {Button, ButtonIcon, ButtonText} from '#/components/Button'
 import {useDialogControl} from '#/components/Dialog'
 import {MessageProfileButton} from '#/components/dms/MessageProfileButton'
+import {ArrowTopRight_Stroke2_Corner0_Rounded as ArrowTopRight} from '#/components/icons/Arrow'
 import {Check_Stroke2_Corner0_Rounded as Check} from '#/components/icons/Check'
 import {PlusLarge_Stroke2_Corner0_Rounded as Plus} from '#/components/icons/Plus'
 import {
@@ -74,6 +75,7 @@ let ProfileHeaderStandard = ({
     profile.viewer?.blocking ||
     profile.viewer?.blockedBy ||
     profile.viewer?.blockingByList
+  const t = useTheme()
 
   const {openModal} = useModalControls()
   const editProfileControl = useDialogControl()
@@ -288,6 +290,7 @@ let ProfileHeaderStandard = ({
                       <img src={link.icon as any} style={{height: '24px'}} />
                     ) : null}
                     <ButtonText>{link.title}</ButtonText>
+                    <ArrowTopRight size="sm" fill={t.atoms.text.color} />
                   </Button>
                 ))}
               </View>
