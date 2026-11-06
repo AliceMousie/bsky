@@ -15,7 +15,7 @@ import {AppBskyActorDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 
-import {MAX_DESCRIPTION, MAX_DISPLAY_NAME} from '#/lib/constants'
+import {MAX_DESCRIPTION, MAX_DISPLAY_NAME, MAX_PRONOUNS} from '#/lib/constants'
 import {usePalette} from '#/lib/hooks/usePalette'
 import {compressIfNeeded} from '#/lib/media/manip'
 import {cleanError} from '#/lib/strings/errors'
@@ -56,6 +56,9 @@ export function Component({
   )
   const [description, setDescription] = useState<string>(
     profile.description || '',
+  )
+  const [pronouns, setPronouns] = useState<string>(
+    (profile as any).pronouns || '',
   )
   const [userBanner, setUserBanner] = useState<string | undefined | null>(
     profile.banner,
@@ -120,6 +123,7 @@ export function Component({
         updates: {
           displayName,
           description,
+          pronouns: pronouns || undefined,
         },
         newUserAvatar,
         newUserBanner,
@@ -137,6 +141,7 @@ export function Component({
     closeModal,
     displayName,
     description,
+    pronouns,
     newUserAvatar,
     newUserBanner,
     setImageError,
@@ -189,6 +194,22 @@ export function Component({
               accessible={true}
               accessibilityLabel={_(msg`Display name`)}
               accessibilityHint={_(msg`Edit your display name`)}
+            />
+          </View>
+          <View>
+            <Text style={[styles.label, pal.text]}>
+              <Trans>Pronouns</Trans>
+            </Text>
+            <TextInput
+              testID="editProfilePronounsInput"
+              style={[styles.textInput, pal.border, pal.text]}
+              placeholder={_(msg`e.g. she/her`)}
+              placeholderTextColor={colors.gray4}
+              value={pronouns}
+              onChangeText={v => setPronouns(enforceLen(v, MAX_PRONOUNS))}
+              accessible={true}
+              accessibilityLabel={_(msg`Pronouns`)}
+              accessibilityHint={_(msg`Edit your pronouns`)}
             />
           </View>
           <View style={s.pb10}>
