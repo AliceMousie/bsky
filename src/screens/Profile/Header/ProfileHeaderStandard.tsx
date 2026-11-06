@@ -289,7 +289,7 @@ let ProfileHeaderStandard = ({
                     {link.icon ? (
                       <img src={link.icon as any} style={{height: '24px'}} />
                     ) : null}
-                    <ButtonText>{link.title}</ButtonText>
+                    <ButtonText>{link.title || link.url}</ButtonText>
                     <ArrowTopRight size="sm" fill={t.atoms.text.color} />
                   </Button>
                 ))}
